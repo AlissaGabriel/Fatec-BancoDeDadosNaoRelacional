@@ -5,11 +5,11 @@
 
 db.orders.aggregate([
     {
-        $lookup: {
-            from: "users",
-            localField: "user_id",
-            foreignField: "_id",
-            as: "user_info"
+        $lookup: { //operador que realiza a junção entre coleções
+            from: "users", //nome da coleção que será associada
+            localField: "user_id", //campo na coleção "orders" que faz referência a coleção "users"
+            foreignField: "_id", //campo correspondente na coleção "users"
+            as: "user_info" //nome do novo campo onde os dados combinados serão armazenados
         }
     }
 ])
@@ -26,8 +26,9 @@ db.orders.aggregate([
 ])
 
 //pipeline de agregação
-//a pipeline de agregação é a sequência de estágios que os documentos percorrem durante o processo de agregação. Cada estágio aplica uma operação específica aos documentos e 
-//passa o resultado para o próximo estágio
+//a pipeline de agregação é a sequência de estágios que os documentos 
+//percorrem durante o processo de agregação. Cada estágio aplica uma 
+//operação específica aos documentos e passa o resultado para o próximo estágio
 db.collection.aggregate([
     { estagio1 },
     { estagio2 },
